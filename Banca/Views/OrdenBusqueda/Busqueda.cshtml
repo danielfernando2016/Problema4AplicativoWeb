@@ -1,0 +1,35 @@
+﻿@model Banca.Models.Orden
+
+@{
+    ViewData["Title"] = "Busqueda Ordenes";
+}
+
+<h1>Buscar Orden</h1>
+
+<form asp-controller="OrdenBusqueda" asp-action="Resultado" method="post">
+    <p>
+
+        <select asp-for="Moneda" class="form-control">
+            <option value="Soles">Soles</option>
+            <option value="Dolares">Dolares</option>
+        </select>
+        <br />
+        <select asp-for="IdSucursal" class="form-control">
+            <option value="">-- Seleccionar Sucursal --</option>
+            @foreach (var sucursal in Model.Sucursales)
+                    {
+            <option value="@sucursal.Id">@sucursal.Nombre</option>
+                    }
+        </select>
+
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div>
+    <a asp-action="Index">Retornar Pagina Principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

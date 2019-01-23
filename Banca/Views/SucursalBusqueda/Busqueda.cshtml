@@ -1,0 +1,35 @@
+﻿@model Banca.Models.Sucursal
+
+@{
+    ViewData["Title"] = "Busqueda Sucursales";
+}
+
+<h1>Buscar Sucursal</h1>
+
+
+
+
+
+<form asp-controller="SucursalBusqueda" asp-action="Busqueda" method="post">
+    <p>
+
+        
+        <select asp-for="Id" class="form-control">
+            <option value="">-- Seleccionar Banco --</option>
+            @foreach (var banco in Model.Bancos)
+                    {
+            <option value="@banco.Id">@banco.Nombre</option>
+                    }
+        </select>
+
+        <input type="submit" value="Buscar" />
+    </p>
+</form>
+
+<div>
+    <a asp-action="Index">Retornar Pagina Principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

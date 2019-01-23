@@ -1,0 +1,63 @@
+﻿@model Banca.Models.Orden
+
+@{
+    ViewData["Title"] = "Crear Orden";
+}
+
+<h1>Crear Orden</h1>
+
+<h4>Orden</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Moneda" class="control-label"></label>
+                <select asp-for="Moneda" class="form-control">                    
+                    <option value="Soles">Soles</option>
+                    <option value="Dolares">Dolares</option>
+                </select>
+                <span asp-validation-for="Moneda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" class="form-control">
+                    <option value="Pagada">Pagada</option>
+                    <option value="Declinada">Declinada</option>
+                    <option value="Fallida">Fallida</option>
+                    <option value="Anulada">Anulada</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               
+                <select asp-for="IdSucursal" class="form-control">
+                    <option value="">-- Seleccionar Sucursal --</option>
+                    @foreach (var sucursal in Model.Sucursales)
+                    {
+                        <option value="@sucursal.Id">@sucursal.Nombre</option>
+                    }
+                </select>
+
+                <span asp-validation-for="IdSucursal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar Pagina Principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,50 @@
+﻿@model Banca.Models.Sucursal
+
+@{
+    ViewData["Title"] = "Información Sucursal";
+}
+
+<h1>Información Sucursal</h1>
+
+<div>
+    <h4>Sucursal</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdSucursal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdSucursal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreBanco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreBanco)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdSucursal">Modificar</a> |
+    <a asp-action="Index">Retornar Pagina Principal</a>
+</div>

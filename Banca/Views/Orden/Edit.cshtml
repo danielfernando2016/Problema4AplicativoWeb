@@ -1,0 +1,106 @@
+﻿@model Banca.Models.Orden
+
+@{
+    ViewData["Title"] = "Modificar Orden";
+}
+
+<h1>Modificar Orden</h1>
+
+<h4>Orden</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Moneda" class="control-label"></label>
+                <select asp-for="Moneda" class="form-control">
+                    @if (Model.Moneda == "Soles")
+                    {
+                        <option selected="selected" value="Soles">Soles</option>
+                        <option value="Dolares">Dolares</option>
+                    }
+                    ëlse
+                    {
+                        <option value="Soles">Soles</option>
+                        <option selected="selected" value="Dolares">Dolares</option>
+                    }
+
+                </select>
+                <span asp-validation-for="Moneda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" class="form-control">
+                    @switch (Model.Estado)
+                    {
+                        case "Pagada":
+                            <option selected="selected" value="Pagada">Pagada</option>
+                            <option value="Declinada">Declinada</option>
+                            <option value="Fallida">Fallida</option>
+                            <option value="Anulada">Anulada</option>
+                            break;
+                        case "Declinada":
+                            <option value="Pagada">Pagada</option>
+                            <option selected="selected" value="Declinada">Declinada</option>
+                            <option value="Fallida">Fallida</option>
+                            <option value="Anulada">Anulada</option>
+                            break;
+                        case "Fallida":
+                            <option value="Pagada">Pagada</option>
+                            <option value="Declinada">Declinada</option>
+                            <option selected="selected" value="Fallida">Fallida</option>
+                            <option value="Anulada">Anulada</option>
+                            break;
+                        default:
+                            <option value="Pagada">Pagada</option>
+                            <option value="Declinada">Declinada</option>
+                            <option value="Fallida">Fallida</option>
+                            <option selected="selected" value="Anulada">Anulada</option>
+                            break;
+                    }
+
+
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="IdSucursal" class="form-control">
+
+                    @foreach (var sucursal in Model.Sucursales)
+                    {
+                        if (sucursal.IdSucursal == Model.IdSucursal)
+                        {
+                            <option selected="selected" value="@sucursal.IdSucursal">@sucursal.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@sucursal.IdSucursal">@sucursal.Nombre</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="IdSucursal" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar Pagina Principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
